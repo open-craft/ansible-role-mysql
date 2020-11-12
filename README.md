@@ -46,6 +46,11 @@ Whether MySQL should be enabled on startup.
     
 The main my.cnf configuration file and include directory.
 
+    mysql_defaults_file: *default value depends on OS*
+    mysql_logrotate_config_file: *default value depends on OS*
+
+The logrotation configuration file and mysql_defaults_file for mysql logs.
+
     overwrite_global_mycnf: yes
 
 Whether the global my.cnf should be overwritten each time this role is run. Setting this to `no` tells Ansible to only create the `my.cnf` file if it doesn't exist. This should be left at its default value (`yes`) if you'd like to use this role's variables to configure MySQL.

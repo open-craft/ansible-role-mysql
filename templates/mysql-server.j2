@@ -1,0 +1,26 @@
+# {{ ansible_managed }}
+
+# - I put everything in one block and added sharedscripts, so that mysql gets
+#   flush-logs'd only once.
+#   Else the binary logs would automatically increase by n times every day.
+# - The error log is obsolete, messages go to syslog now.
+{% if mysql_log == '' %}{{ mysql_log }} {% endif %}/var/log/mysql/*log {
+	daily
+	rotate 7
+	missingok
+	create 640 mysql adm
+	compress
+	sharedscripts
+	postrotate
+		test -x /usr/bin/mysqladmin || exit 0
+		# If this fails, check {{ mysql_defaults_file }}!
+		MYADMIN="/usr/bin/mysqladmin --defaults-file={{ mysql_defaults_file }}"
+		if [ -z "`$MYADMIN ping 2>/dev/null`" ]; then
+		  if killall -q -s0 -umysql mysqld; then
+ 		    exit 1
+		  fi
+		else
+		  $MYADMIN flush-logs
+		fi
+	endscript
+}

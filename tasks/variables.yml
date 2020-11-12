@@ -47,6 +47,16 @@
     mysql_config_file: "{{ __mysql_config_file }}"
   when: mysql_config_file is not defined
 
+- name: Define mysql_defaults_file:
+  set_fact:
+    mysql_defaults_file: "{{ __mysql_defaults_file }}"
+  when: mysql_defaults_file is not defined
+
+- name: Define mysql_logrotate_config_file:
+  set_fact:
+    mysql_logrotate_config_file: "{{ __mysql_logrotate_config_file }}"
+  when: mysql_logrotate_config_file is not defined
+
 - name: Define mysql_config_include_dir.
   set_fact:
     mysql_config_include_dir: "{{ __mysql_config_include_dir }}"

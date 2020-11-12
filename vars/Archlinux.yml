@@ -7,6 +7,8 @@ __mysql_log_error: /var/log/mysql.err
 __mysql_syslog_tag: mysql
 __mysql_pid_file: /run/mysqld/mysqld.pid
 __mysql_config_file: /etc/mysql/my.cnf
+__mysql_defaults_file: /etc/mysql/my.cnf
+__mysql_logrotate_config_file: /etc/logrotate.d/mysql-server
 __mysql_config_include_dir: /etc/mysql/conf.d
 __mysql_socket: /run/mysqld/mysqld.sock
 __mysql_supports_innodb_large_prefix: true
